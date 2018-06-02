@@ -1,0 +1,29 @@
+{
+
+
+
+
+measurement= $4"_"$5
+gsub(/[[:space:]]+.*$/,"",measurement)
+
+match($6, /([0-9])/,inte) 
+match($9, /val=(-?[0-9]+.*[0-9]*)/,valu13)
+match($10, /val=(-?[0-9]+.*[0-9]*)/,valu189)
+
+
+inter=inte[1]
+if(length(inter) == 0) inter = "0"
+
+##2018010106
+date=substr($8,4)
+YYYY = substr(date,1,4)
+MM = substr(date,5,2)
+DD = substr(date,7,2)
+HH = substr(date,9,2)
+date=YYYY" "MM" "DD" "HH" 00 00"
+ts = mktime(date)
+
+print measurement",id=13 value="valu13[1], ts
+print measurement",id=189 value="valu189[1], ts
+
+}
